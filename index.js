@@ -6,6 +6,7 @@ const userRoutes = require('./src/routes/user-route');
 const mongoose = require('mongoose');
 const { createFirstUser } = require('./src/db/UserSeeder');
 const authMiddleware = require('./src/auth/authMiddleware');
+const seedPokemons = require('./src/db/PokemonSeeder');
 //dot env
 require('dotenv').config();
 
@@ -18,6 +19,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 createFirstUser();
+seedPokemons();
+
 
 // Users
 app.post('/api/login', userRoutes.userLogin);
