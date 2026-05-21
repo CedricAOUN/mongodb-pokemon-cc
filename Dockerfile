@@ -4,12 +4,13 @@ WORKDIR /app
 
 COPY package.json ./
 RUN npm install --omit=dev
+RUN npm install -g nodemon
 
 COPY . .
 
 ENV MONGODB_URI=mongodb://db:27017/PokemonDB
-ENV PORT=8080
+ENV PORT=3000
 
-EXPOSE 8080
+EXPOSE 3000
 
-CMD ["node", "index.js"]
+CMD ["nodemon", "index.js"]

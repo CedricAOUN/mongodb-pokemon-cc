@@ -10,10 +10,25 @@ services:
       - db_data:/data/db
     networks:
       - pokemon_network
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express
+    restart: on-failure
+    depends_on:
+      - db
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://db:27017/
+    networks:
+      - pokemon_network
+
   app:
     build: .
+    container_name: pokemon_app
     ports:
-      - "3000:8080"
+      - "3000:3000"
     networks:
       - pokemon_network
 
